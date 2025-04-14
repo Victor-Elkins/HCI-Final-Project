@@ -1,0 +1,34 @@
+/* ... previous styles ... */
+
+.ios-navigation-bar {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #d1d1d6;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between; /* Space out the buttons and title */
+  align-items: center;
+}
+
+.ios-navigation-bar h1 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: #007aff; /* Typical iOS blue for interactive elements */
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none; /* Remove default focus outline */
+}
+
+.nav-button.left-button {
+  /* Specific styling for the left button if needed */
+}
+
+.nav-button.right-button {
+  /* Specific styling for the right button if needed */
+}
