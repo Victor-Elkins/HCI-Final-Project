@@ -1,0 +1,116 @@
+.workout-screen {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f7;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .cached-workouts-section {
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .cached-workouts-section h2 {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .cached-workout-item {
+    background-color: #e0e0e7;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cached-workout-item:hover {
+    background-color: #d1d1d6;
+  }
+  
+  .manual-log-form {
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .manual-log-form h2 {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type='number'],
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+  }
+  
+  .save-button {
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+  }
+  
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: green;
+    text-align: center;
+  }
+
+  /* ... other styles ... */
+
+.other-exercise-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    margin-top: 8px; /* Add some spacing below the select */
+  }
+  
+  /* ... other styles ... */

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './LockScreen.css';
+import WorkoutScreen from './WorkoutScreen';
 
 function LockScreen() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isWorkoutScreenVisible, setIsWorkoutScreenVisible] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -16,19 +18,22 @@ function LockScreen() {
   const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
 
   const handleNotificationClick = () => {
-    // For now, let's just log a message to the console
     console.log('Workout notification clicked!');
-    // Later, we'll add navigation logic here
+    setIsWorkoutScreenVisible(true); // Set state to show WorkoutScreen
   };
+
+  if (isWorkoutScreenVisible) {
+    return <WorkoutScreen />; // Render WorkoutScreen if state is true
+  }
 
   return (
     <div className="lock-screen">
       <div className="status-bar">
         <div className="time">{formattedTime}</div>
         <div className="status-icons">
-          <span>Location Services On 📶</span>
+          <span>📶</span>
           <span>🔋 100%</span>
-          <span className="location-on">📍</span> {/* Placeholder for location icon */}
+          <span className="location-on">📍</span>
         </div>
       </div>
       <div className="date-display">{formattedDate}</div>
