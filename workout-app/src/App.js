@@ -13,7 +13,7 @@ function App() {
   const [showHistoryScreen, setShowHistoryScreen] = useState(false);
   const [lastWorkout, setLastWorkout] = useState(null);
   const [loggedWorkouts, setLoggedWorkouts] = useState([]); // State for logged workouts
-  
+
   // New state for cached workouts
   const [cachedWorkouts, setCachedWorkouts] = useState([
     { type: 'Running', duration: '30 mins' },
@@ -31,16 +31,16 @@ function App() {
   const handleWorkoutSave = (workoutData) => {
     setLastWorkout(workoutData);
     setLoggedWorkouts(prev => [...prev, workoutData]); // Add the new workout to the list
-    
+
     // Update cached workouts if it's not already in the list
     const workoutExists = cachedWorkouts.some(
       workout => workout.type === workoutData.type && workout.duration === workoutData.duration
     );
-    
+
     if (!workoutExists) {
       setCachedWorkouts(prev => [...prev, workoutData]);
     }
-    
+
     setShowConfirmation(true);
     setShowWorkoutScreen(false);
     setShowSettingsScreen(false);
@@ -80,7 +80,7 @@ function App() {
   };
 
   if (showHistoryScreen) {
-    return <WorkoutHistoryScreen onGoBack={goBackFromHistory} workouts={loggedWorkouts} />;
+    return <WorkoutHistoryScreen onGoBack={goToWorkoutLog} workouts={loggedWorkouts} />;
   }
 
   if (showSettingsScreen) {
@@ -90,18 +90,19 @@ function App() {
   if (showConfirmation) {
     return <WorkoutConfirmationScreen
       lastWorkout={lastWorkout}
-      onGoBack={goToWorkoutLog}
       onGoSettings={goToSettings}
       onGoHistory={goToHistory}
+      onGoToWorkoutLog={goToWorkoutLog} // Pass the goToWorkoutLog function
     />;
   }
 
   if (showWorkoutScreen) {
-    return <WorkoutScreen 
-      onWorkoutSaved={handleWorkoutSave} 
-      onGoHome={goToWorkoutLog} 
+    return <WorkoutScreen
+      onWorkoutSaved={handleWorkoutSave}
       onGoSettings={goToSettings}
-      cachedWorkouts={cachedWorkouts} // Pass cached workouts as prop
+      onGoHistory={goToHistory} // Pass the goToHistory function
+      cachedWorkouts={cachedWorkouts}
+      onGoHome={goToWorkoutLog} // Keep this for the header button in WorkoutScreen
     />;
   }
 

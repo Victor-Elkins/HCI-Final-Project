@@ -1,18 +1,24 @@
 .settings-screen {
     padding: 20px;
+    background-color: #f0f0f7;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #f4f4f4; /* A slightly different background */
-    min-height: 100vh;
   }
   
   .header {
-    width: 100%;
     display: flex;
-    justify-content: flex-start;
-    padding: 10px 0;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d1d1d6;
     margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 1.8em;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
   }
   
   .header-button {
@@ -21,16 +27,93 @@
     font-size: 1.5em;
     cursor: pointer;
     padding: 8px;
+    margin-right: 15px;
     outline: none;
   }
   
-  h1 {
-    font-size: 2.5em;
-    color: #555;
-    margin-bottom: 20px;
+  .settings-section {
+    margin-bottom: 30px;
   }
   
-  p {
-    font-size: 1.1em;
+  .settings-section h2 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .setting-description {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  
+  /* iOS Toggle Styles */
+  .ios-toggle {
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #e0e0e0;
+    border: 1px solid #c7c7cc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ios-toggle.on {
+    background-color: #4cd964; /* Green when on */
+    border-color: #4cd964;
+  }
+  
+  .ios-toggle.off {
+    background-color: #e0e0e0; /* Gray when off */
+    border-color: #c7c7cc;
+  }
+  
+  .toggle-handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ios-toggle.on .toggle-handle {
+    transform: translateX(20px);
+  }
+  
+  /* Small Toggle Style */
+  .ios-toggle.small {
+    width: 40px;
+    height: 24px;
+    border-radius: 12px;
+  }
+  
+  .ios-toggle.small .toggle-handle {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .ios-toggle.small.on .toggle-handle {
+    transform: translateX(16px);
+  }
+  
+  .toggle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .toggle-item:last-child {
+    border-bottom: none;
+  }
+  
+  .toggle-item label {
+    font-size: 1em;
     color: #333;
   }

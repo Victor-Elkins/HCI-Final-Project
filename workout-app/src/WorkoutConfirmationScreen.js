@@ -1,11 +1,7 @@
 import React from 'react';
 import './WorkoutConfirmationScreen.css';
 
-function WorkoutConfirmationScreen({ lastWorkout, onGoBack, onGoSettings, onGoHistory }) {
-  const goToWorkoutLog = () => {
-    onGoBack();
-  };
-
+function WorkoutConfirmationScreen({ lastWorkout, onGoSettings, onGoHistory, onGoToWorkoutLog }) {
   const goToSettings = () => {
     onGoSettings();
   };
@@ -14,10 +10,14 @@ function WorkoutConfirmationScreen({ lastWorkout, onGoBack, onGoSettings, onGoHi
     onGoHistory();
   };
 
+  const goToWorkoutLogScreen = () => {
+    onGoToWorkoutLog(); // Call the prop to go back to the WorkoutScreen
+  };
+
   return (
     <div className="workout-confirmation-screen">
       <div className="header">
-        <button className="header-button home-button" onClick={goToWorkoutLog}>
+        <button className="header-button home-button" onClick={goToWorkoutLogScreen}>
           🏠
         </button>
         <button className="header-button settings-button" onClick={goToSettings}>

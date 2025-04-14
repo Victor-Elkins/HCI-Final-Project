@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import './WorkoutScreen.css';
 
-function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts }) {
+function WorkoutScreen({ onWorkoutSaved, onGoSettings, onGoHistory, cachedWorkouts }) {
   const [exerciseType, setExerciseType] = useState('');
   const [otherExercise, setOtherExercise] = useState('');
   const [duration, setDuration] = useState('');
-  
-  // No longer managing cachedWorkouts as internal state
-  // We now receive it as a prop
 
   const handleExerciseTypeChange = (event) => {
     setExerciseType(event.target.value);
@@ -29,7 +26,11 @@ function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts 
     let finalDuration = workout.duration.replace(' mins', ''); // Extract duration in minutes
 
     if (finalExerciseType && finalDuration) {
-      const newWorkout = { type: finalExerciseType, duration: `${finalDuration} mins` };
+      const newWorkout = {
+        type: finalExerciseType,
+        duration: `${finalDuration} mins`,
+        timestamp: new Date().toISOString(), // Add timestamp
+      };
       console.log('Workout saved (via quick log):', newWorkout);
       onWorkoutSaved(newWorkout); // Call the callback to notify App
       // Reset form
@@ -45,10 +46,14 @@ function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts 
     let finalExerciseType = exerciseType;
     if (exerciseType === 'Other' && otherExercise) {
       finalExerciseType = otherExercise;
-    } 
+    }
 
     if (finalExerciseType && duration) {
-      const newWorkout = { type: finalExerciseType, duration: `${duration} mins` };
+      const newWorkout = {
+        type: finalExerciseType,
+        duration: `${duration} mins`,
+        timestamp: new Date().toISOString(), // Add timestamp
+      };
       console.log('Workout saved (manual):', newWorkout);
       onWorkoutSaved(newWorkout); // Call the callback to notify App
       // Reset form
@@ -64,11 +69,15 @@ function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts 
     handleSaveWorkout(workout); // Directly call handleSaveWorkout with the cached workout
   };
 
+  const goToHistory = () => {
+    onGoHistory(); // Call the prop to navigate to WorkoutHistoryScreen
+  };
+
   return (
     <div className="workout-screen">
       <div className="header">
-        <button className="header-button home-button" onClick={onGoHome}>
-          🏠
+        <button className="header-button history-button" onClick={goToHistory}>
+          Logs
         </button>
         <button className="header-button settings-button" onClick={onGoSettings}>
           ⚙️
@@ -131,6 +140,8 @@ function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts 
           Save Workout
         </button>
       </div>
+
+      {/* Removed the separate Workout History button */}
     </div>
   );
 }
