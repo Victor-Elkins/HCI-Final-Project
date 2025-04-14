@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import './WorkoutScreen.css';
 
-function WorkoutScreen() {
+function WorkoutScreen({ onWorkoutSaved, onGoHome, onGoSettings, cachedWorkouts }) {
   const [exerciseType, setExerciseType] = useState('');
   const [otherExercise, setOtherExercise] = useState('');
   const [duration, setDuration] = useState('');
-  const [cachedWorkouts, setCachedWorkouts] = useState([
-    { type: 'Running', duration: '30 mins' },
-    { type: 'Weightlifting', duration: '45 mins' },
-    { type: 'Yoga', duration: '60 mins' },
-  ]);
-  const [newlySavedWorkout, setNewlySavedWorkout] = useState(null);
+  
+  // No longer managing cachedWorkouts as internal state
+  // We now receive it as a prop
 
   const handleExerciseTypeChange = (event) => {
     setExerciseType(event.target.value);
     if (event.target.value !== 'Other') {
-      setOtherExercise(''); // Clear 'other' input if a preset is selected
+      setOtherExercise('');
     }
   };
 
@@ -27,40 +24,58 @@ function WorkoutScreen() {
     setDuration(event.target.value);
   };
 
-  const handleSaveWorkout = () => {
-    let finalExerciseType = exerciseType;
-    if (exerciseType === 'Other' && otherExercise) {
-      finalExerciseType = otherExercise;
-    } else if (exerciseType === 'Other' && !otherExercise) {
-      alert('Please specify the exercise type when selecting "Other".');
-      return;
-    }
+  const handleSaveWorkout = (workout) => {
+    let finalExerciseType = workout.type;
+    let finalDuration = workout.duration.replace(' mins', ''); // Extract duration in minutes
 
-    if (finalExerciseType && duration) {
-      const newWorkout = { type: finalExerciseType, duration: `${duration} mins` };
-      setCachedWorkouts([...cachedWorkouts, newWorkout]);
-      setNewlySavedWorkout(newWorkout);
+    if (finalExerciseType && finalDuration) {
+      const newWorkout = { type: finalExerciseType, duration: `${finalDuration} mins` };
+      console.log('Workout saved (via quick log):', newWorkout);
+      onWorkoutSaved(newWorkout); // Call the callback to notify App
       // Reset form
       setExerciseType('');
       setOtherExercise('');
       setDuration('');
-      console.log('Workout saved:', newWorkout);
-      // In the future, trigger end-result screen
+    } else {
+      alert('Error saving workout.');
+    }
+  };
+
+  const handleManualSave = () => {
+    let finalExerciseType = exerciseType;
+    if (exerciseType === 'Other' && otherExercise) {
+      finalExerciseType = otherExercise;
+    } 
+
+    if (finalExerciseType && duration) {
+      const newWorkout = { type: finalExerciseType, duration: `${duration} mins` };
+      console.log('Workout saved (manual):', newWorkout);
+      onWorkoutSaved(newWorkout); // Call the callback to notify App
+      // Reset form
+      setExerciseType('');
+      setOtherExercise('');
+      setDuration('');
     } else {
       alert('Please select an exercise type and enter the duration.');
     }
   };
 
   const handleCachedWorkoutClick = (workout) => {
-    console.log('Cached workout selected:', workout);
-    // Later, we might pre-fill the form.
+    handleSaveWorkout(workout); // Directly call handleSaveWorkout with the cached workout
   };
 
   return (
     <div className="workout-screen">
+      <div className="header">
+        <button className="header-button home-button" onClick={onGoHome}>
+          🏠
+        </button>
+        <button className="header-button settings-button" onClick={onGoSettings}>
+          ⚙️
+        </button>
+      </div>
       <h1>Log Workout</h1>
 
-      {/* Cached Workouts Section */}
       <div className="cached-workouts-section">
         <h2>Quick Log</h2>
         {cachedWorkouts.map((workout, index) => (
@@ -75,7 +90,6 @@ function WorkoutScreen() {
         {cachedWorkouts.length === 0 && <p>No cached workouts yet.</p>}
       </div>
 
-      {/* Manual Workout Logging Form */}
       <div className="manual-log-form">
         <h2>New Workout</h2>
         <div className="form-group">
@@ -113,14 +127,9 @@ function WorkoutScreen() {
             onChange={handleDurationChange}
           />
         </div>
-        <button onClick={handleSaveWorkout} className="save-button">
+        <button onClick={handleManualSave} className="save-button">
           Save Workout
         </button>
-        {newlySavedWorkout && (
-          <p className="success-message">
-            Saved: {newlySavedWorkout.type} - {newlySavedWorkout.duration}
-          </p>
-        )}
       </div>
     </div>
   );

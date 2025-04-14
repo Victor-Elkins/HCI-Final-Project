@@ -1,0 +1,59 @@
+.workout-confirmation-screen {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f7;
+    min-height: 100vh;
+  }
+  
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+  
+  .header-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 8px;
+    outline: none;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    color: #007aff;
+    margin-bottom: 20px;
+  }
+  
+  .feedback {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .feedback p {
+    font-size: 1.1em;
+    color: #333;
+  }
+  
+  .calendar-section {
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .calendar-section h2 {
+    font-size: 1.5em;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  /* We'll add calendar styling later */

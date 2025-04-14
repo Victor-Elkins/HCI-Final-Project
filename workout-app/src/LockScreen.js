@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './LockScreen.css';
-import WorkoutScreen from './WorkoutScreen';
 
-function LockScreen() {
+function LockScreen({ onNotificationClick }) {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [isWorkoutScreenVisible, setIsWorkoutScreenVisible] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -17,15 +15,6 @@ function LockScreen() {
   const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const formattedDate = currentTime.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
 
-  const handleNotificationClick = () => {
-    console.log('Workout notification clicked!');
-    setIsWorkoutScreenVisible(true); // Set state to show WorkoutScreen
-  };
-
-  if (isWorkoutScreenVisible) {
-    return <WorkoutScreen />; // Render WorkoutScreen if state is true
-  }
-
   return (
     <div className="lock-screen">
       <div className="status-bar">
@@ -37,7 +26,7 @@ function LockScreen() {
         </div>
       </div>
       <div className="date-display">{formattedDate}</div>
-      <button className="notification-area" onClick={handleNotificationClick}>
+      <button className="notification-area" onClick={onNotificationClick}>
         <div className="notification-icon">💪</div>
         <div className="notification-text-container">
           <div className="notification-text">Are you working out right now?</div>
@@ -57,6 +46,7 @@ function LockScreen() {
           </span>
         </div>
       </div>
+      {/* Removed temporary simulate button */}
     </div>
   );
 }
